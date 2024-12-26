@@ -1,14 +1,15 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-const SHOOT_INVERVAL: float = 0.2
 
+const SHOOT_INVERVAL: float = 0.2
 @export
 var projectile_scene: PackedScene
 var shoot_timer: float = SHOOT_INVERVAL
+const SHOOT_VELOCITY: float = 600
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("shoot") && can_shoot():
+func _process(delta: float) -> void:
+	if Input.is_action_pressed("shoot") && can_shoot():
 		shoot()
 		shoot_timer = 0
 
@@ -27,5 +28,6 @@ func can_shoot() -> bool:
 	return shoot_timer >= SHOOT_INVERVAL
 func shoot():
 	var proj: Projectile = projectile_scene.instantiate()
-	proj.velocity = Vector2.from_angle(rotation)
+	proj.global_position = global_position
+	proj.velocity = Vector2.from_angle(rotation - PI / 2) * SHOOT_VELOCITY
 	get_parent().add_child(proj)
