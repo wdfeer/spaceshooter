@@ -29,3 +29,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
 		area.dead = true
 		area.queue_free()
+
+func kill():
+	UserData.kill_count += 1
+	queue_free()

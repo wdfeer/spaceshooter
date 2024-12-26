@@ -15,6 +15,10 @@ config/version="2a"
 run/main_scene="res://src/solar_system/solar_system.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 
+[autoload]
+
+UserData="*res://src/user_data.gd"
+
 [display]
 
 window/size/viewport_width=2560

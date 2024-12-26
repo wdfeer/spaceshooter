@@ -1,10 +1,87 @@
-[gd_scene load_steps=7 format=3 uid="uid://bo2uyrutxrce5"]
+[gd_scene load_steps=12 format=3 uid="uid://bo2uyrutxrce5"]
 
-[ext_resource type="Script" path="res://src/solar_system/sun.gd" id="1_fy3yr"]
+[ext_resource type="Script" path="res://src/solar_system/sun_visual.gd" id="1_fy3yr"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="1_xq2cx"]
 [ext_resource type="Script" path="res://src/solar_system/solar_system.gd" id="1_yhnk1"]
 [ext_resource type="PackedScene" uid="uid://1jqojvimrfhr" path="res://src/mars.tscn" id="2_w5d6k"]
+[ext_resource type="Script" path="res://src/solar_system/ui_animator.gd" id="4_ofred"]
+[ext_resource type="Script" path="res://src/solar_system/sun_area.gd" id="4_t8s7a"]
 [ext_resource type="Script" path="res://src/solar_system/planet.gd" id="4_wj1of"]
+
+[sub_resource type="Animation" id="Animation_a60hq"]
+resource_name = "show"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun/SunArea/KillCount:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.01),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sun/SunArea/KillCount:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sun/SunArea/UIAnimator")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_ui_show"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ml16k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun/SunArea/KillCount:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sun/SunArea/KillCount:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iobg7"]
+_data = {
+"RESET": SubResource("Animation_ml16k"),
+"show": SubResource("Animation_a60hq")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3325"]
 size = Vector2(2640, 1480)
@@ -15,7 +92,41 @@ monitorable = false
 script = ExtResource("1_yhnk1")
 mars_scene = ExtResource("2_w5d6k")
 
-[node name="Sun" type="Polygon2D" parent="."]
+[node name="Sun" type="Node2D" parent="."]
+
+[node name="SunArea" type="Area2D" parent="Sun"]
+script = ExtResource("4_t8s7a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sun/SunArea"]
+polygon = PackedVector2Array(-160, 0, 0, -160, 160, 0, 0, 160)
+
+[node name="UIAnimator" type="AnimationPlayer" parent="Sun/SunArea"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_iobg7")
+}
+script = ExtResource("4_ofred")
+
+[node name="KillCount" type="Label" parent="Sun/SunArea"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(256, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -680.0
+offset_right = 128.0
+offset_bottom = -592.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Kills: %s"
+horizontal_alignment = 1
+
+[node name="Polygon" type="Polygon2D" parent="Sun"]
 color = Color(1, 0.870588, 0.482353, 1)
 polygon = PackedVector2Array(0, -80, -40, -40, -80, 0, 0, 80, 80, 0)
 script = ExtResource("1_fy3yr")
@@ -55,4 +166,6 @@ position = Vector2(-400, 0)
 visible = false
 shape = SubResource("RectangleShape2D_s3325")
 
+[connection signal="area_entered" from="Sun/SunArea" to="Sun/SunArea" method="_on_area_entered"]
+[connection signal="area_exited" from="Sun/SunArea" to="Sun/SunArea" method="_on_area_exited"]
 [connection signal="area_entered" from="Mars/MarsLoader" to="." method="_on_mars_loader_area_entered"]
