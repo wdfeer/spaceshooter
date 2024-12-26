@@ -12,6 +12,7 @@ config_version=5
 
 config/name="SpaceShooter"
 config/version="1a"
+run/main_scene="res://src/game.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 
 [display]
