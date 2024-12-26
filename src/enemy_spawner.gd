@@ -5,8 +5,12 @@ const ENEMY_SPAWN_DISTANCE = 1000
 @export
 var enemy_scene: PackedScene
 var enemy_spawn_timer = 0
-@onready
-var game: Node2D = $".."
+var game: Node2D
+
+func _ready() -> void:
+	game = $".."
+	if game == null:
+		error_string(ERR_DOES_NOT_EXIST)
 
 func _process(delta: float) -> void:
 	enemy_spawn_timer += delta

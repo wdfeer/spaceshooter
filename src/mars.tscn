@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://1jqojvimrfhr"]
+
+[ext_resource type="PackedScene" uid="uid://c6er7x7dtmehh" path="res://src/enemy_spawner.tscn" id="1_sn47i"]
+[ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player.tscn" id="2_fu306"]
+
+[node name="Mars" type="Node2D"]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("1_sn47i")]
+
+[node name="Player" parent="." instance=ExtResource("2_fu306")]
