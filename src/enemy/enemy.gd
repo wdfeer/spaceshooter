@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 
 var player_pos: Vector2 = Vector2.ZERO
 func update_player_position(delta: float):
-	var player: Node2D = $"../Player"
+	var player: Node2D = get_node_or_null("../Player")
 	if player:
 		player_pos = player.global_position
 
