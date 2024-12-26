@@ -27,4 +27,5 @@ func update_player_position(delta: float):
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
+		area.dead = true
 		area.queue_free()

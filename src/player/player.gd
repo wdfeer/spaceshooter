@@ -12,3 +12,5 @@ func _physics_process(delta: float) -> void:
 	
 	if velocity.length() > 0:
 		rotation = velocity.angle() + PI / 2
+
+var dead = false
