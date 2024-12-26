@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbwre6tb1fepi"]
 
-[ext_resource type="Script" path="res://src/player.gd" id="1_0hh7j"]
+[ext_resource type="Script" path="res://src/player/player.gd" id="1_0hh7j"]
 [ext_resource type="Texture2D" uid="uid://cee6jpqiwalru" path="res://assets/kenney_simple_space/ship_A.png" id="1_v4nqa"]
 [ext_resource type="PackedScene" uid="uid://dj4t5gv1mgcpp" path="res://src/projectile.tscn" id="2_hejey"]
-[ext_resource type="Script" path="res://src/player_shooter.gd" id="3_ot545"]
+[ext_resource type="Script" path="res://src/player/player_shooter.gd" id="3_ot545"]
 
 [node name="Player" type="Area2D"]
 script = ExtResource("1_0hh7j")
