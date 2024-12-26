@@ -5,15 +5,16 @@ const SPEED = 250.0
 var velocity: Vector2 = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-	velocity = global_position.direction_to(get_player_position()) * SPEED
+	update_player_position(delta)
+	velocity = global_position.direction_to(player_pos) * SPEED
 	rotation = velocity.angle() + PI / 2
 	global_position += velocity * delta
 
-func get_player_position() -> Vector2:
+var player_pos: Vector2 = Vector2.ZERO
+func update_player_position(delta: float):
 	var player: Node2D = $"../Player"
 	if player:
-		return player.global_position
-	return Vector2.ZERO
+		player_pos = player.global_position
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player:

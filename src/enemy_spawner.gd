@@ -13,6 +13,8 @@ func _process(delta: float) -> void:
 	if enemy_spawn_timer > ENEMY_SPAWN_INTERVAL:
 		var enemy: Node2D = enemy_scene.instantiate()
 		var player: Node2D = game.get_node("Player")
+		if !player:
+			return
 		var spawn_pos: Vector2 = player.global_position + Vector2.from_angle(randf_range(0, 2 * PI)) * ENEMY_SPAWN_DISTANCE
 		enemy.global_position = spawn_pos
 		game.add_child(enemy)
