@@ -1,6 +1,15 @@
 class_name Enemy
 extends Area2D
 
+func _ready() -> void:
+	var shapes = get_children().filter(func(x): return (x as Node).name.begins_with("Shape"))
+	for s in shapes:
+		(s as Node2D).disabled = true
+		(s as Node2D).visible = false
+	var active_shape: Node2D = shapes.pick_random()
+	active_shape.disabled = false
+	active_shape.visible = true
+
 const SPEED = 250.0
 var velocity: Vector2 = Vector2.ZERO
 

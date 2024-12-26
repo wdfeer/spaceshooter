@@ -1,15 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://bigt7lnwxekpp"]
+[gd_scene load_steps=7 format=3 uid="uid://bigt7lnwxekpp"]
 
 [ext_resource type="Script" path="res://src/enemy.gd" id="1_f50iw"]
 [ext_resource type="Texture2D" uid="uid://bbb6a133jwp6n" path="res://assets/kenney_simple_space/enemy_A.png" id="1_h06jl"]
+[ext_resource type="Texture2D" uid="uid://3omhno0f1eex" path="res://assets/kenney_simple_space/enemy_B.png" id="3_semax"]
+[ext_resource type="Texture2D" uid="uid://f650r83wlvfl" path="res://assets/kenney_simple_space/enemy_C.png" id="4_qg52i"]
+[ext_resource type="Texture2D" uid="uid://bhhan1lvjanvq" path="res://assets/kenney_simple_space/enemy_D.png" id="5_w7aop"]
+[ext_resource type="Texture2D" uid="uid://cd2ssdg6dmj8" path="res://assets/kenney_simple_space/enemy_E.png" id="6_xxddq"]
 
 [node name="Enemy" type="Area2D"]
 script = ExtResource("1_f50iw")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="Shape1" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-48, 32, -40, 16, -24, 16, -16, 8, 0, -48, 16, 8, 24, 16, 40, 16, 48, 32, 40, 48, 24, 48, 16, 32, 16, 24, 0, 32, -16, 24, -16, 32, -24, 48, -40, 48)
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionPolygon2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Shape1"]
 texture = ExtResource("1_h06jl")
+
+[node name="Shape2" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-48, 0, -40, -16, -24, -16, -16, -8, -8, -8, 0, -48, 8, -8, 16, -8, 24, -16, 40, -16, 48, 0, 40, 16, 24, 16, 16, 8, 8, 8, 16, 32, 0, 48, -16, 32, -8, 8, -16, 8, -24, 16, -40, 16)
+
+[node name="Sprite2D" type="Sprite2D" parent="Shape2"]
+texture = ExtResource("3_semax")
+
+[node name="Shape3" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-64, 0, -48, -24, -32, -24, -16, -8, -8, -8, 0, -32, 8, -8, 16, -8, 32, -24, 48, -24, 64, 0, 48, 24, 32, 24, 16, 8, 8, 8, 16, 16, 0, 32, -16, 16, -8, 8, -16, 8, -32, 24, -48, 24)
+
+[node name="Sprite2D" type="Sprite2D" parent="Shape3"]
+texture = ExtResource("4_qg52i")
+
+[node name="Shape4" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-48, 32, -40, 48, -24, 48, -16, 32, -8, 24, 0, 32, 8, 24, 16, 32, 24, 48, 40, 48, 48, 32, 40, 16, 24, 16, 16, 8, 16, -8, 24, -16, 40, -16, 48, -32, 40, -48, 24, -48, 16, -32, 16, -24, 8, -16, 0, -48, -8, -16, -16, -24, -16, -32, -24, -48, -40, -48, -48, -32, -40, -16, -24, -16, -16, -8, -16, 8, -24, 16, -40, 16)
+
+[node name="Sprite2D" type="Sprite2D" parent="Shape4"]
+texture = ExtResource("5_w7aop")
+
+[node name="Shape5" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-48, -40, -32, -48, -16, -40, -16, -24, -8, -24, 0, -32, 8, -24, 16, -24, 16, -40, 32, -48, 48, -40, 48, -24, 32, -16, 24, -16, 24, -8, 32, 0, 24, 8, 24, 16, 32, 16, 48, 24, 48, 40, 32, 48, 16, 40, 16, 24, 8, 24, 0, 32, -8, 24, -16, 24, -16, 40, -32, 48, -48, 40, -48, 24, -32, 16, -24, 16, -24, 8, -32, 0, -24, -8, -24, -16, -32, -16, -48, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="Shape5"]
+texture = ExtResource("6_xxddq")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
