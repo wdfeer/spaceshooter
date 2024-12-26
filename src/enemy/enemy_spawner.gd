@@ -1,7 +1,7 @@
 extends Node
 
 const ENEMY_SPAWN_INTERVAL = 1
-const ENEMY_SPAWN_DISTANCE = 1000
+const ENEMY_SPAWN_DISTANCE = 1200
 @export
 var enemy_scene: PackedScene
 var enemy_spawn_timer = 0
@@ -19,7 +19,8 @@ func _process(delta: float) -> void:
 		var player: Node2D = game.get_node_or_null("Player")
 		if !player:
 			return
-		var spawn_pos: Vector2 = player.global_position + Vector2.from_angle(randf_range(0, 2 * PI)) * ENEMY_SPAWN_DISTANCE
-		enemy.global_position = spawn_pos
+		var angle = player.global_position.angle_to_point(game.global_position) + randf_range(-PI, PI) / 4
+		var spawn_pos: Vector2 = player.global_position + Vector2.from_angle(angle) * ENEMY_SPAWN_DISTANCE
 		game.add_child(enemy)
+		enemy.global_position = spawn_pos
 		enemy_spawn_timer = 0
