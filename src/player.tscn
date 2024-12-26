@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbwre6tb1fepi"]
+
+[ext_resource type="Texture2D" uid="uid://cee6jpqiwalru" path="res://assets/kenney_simple_space/ship_A.png" id="1_v4nqa"]
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v4nqa")
