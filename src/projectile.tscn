@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj4t5gv1mgcpp"]
+[gd_scene load_steps=3 format=3 uid="uid://dj4t5gv1mgcpp"]
 
 [ext_resource type="Texture2D" uid="uid://bo34kt4tvx82x" path="res://assets/kenney_simple_space/star_tiny.png" id="1_5m6hj"]
+[ext_resource type="Script" path="res://src/projectile.gd" id="1_nkdpy"]
 
-[node name="Projectile" type="CharacterBody2D"]
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_nkdpy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_5m6hj")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 0)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
