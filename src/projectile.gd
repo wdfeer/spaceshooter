@@ -16,4 +16,4 @@ func _on_area_entered(area: Area2D) -> void:
 		area.queue_free()
 
 func can_hit(other: Area2D) -> bool:
-	return true # TODO
+	return (friendly and other is Enemy) or (!friendly and other is Player) 
