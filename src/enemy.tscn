@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/enemy.gd" id="1_f50iw"]
 [ext_resource type="Texture2D" uid="uid://bbb6a133jwp6n" path="res://assets/kenney_simple_space/enemy_A.png" id="1_h06jl"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="Area2D"]
 script = ExtResource("1_f50iw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
