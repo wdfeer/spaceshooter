@@ -1,8 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://bo2uyrutxrce5"]
+[gd_scene load_steps=6 format=3 uid="uid://bo2uyrutxrce5"]
 
 [ext_resource type="Script" path="res://src/solar_system/sun.gd" id="1_fy3yr"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="1_xq2cx"]
 [ext_resource type="Script" path="res://src/solar_system/solar_system.gd" id="1_yhnk1"]
+
+[sub_resource type="GDScript" id="GDScript_tepyw"]
+script/source = "extends Polygon2D
+
+const ORBITAL_VELOCITY: float = 100
+@onready
+var sun: Node2D = $\"../Sun\"
+
+func get_velocity(delta: float) -> Vector2:
+	return position.direction_to(sun.position).rotated(PI / 2) * delta * ORBITAL_VELOCITY
+
+func _process(delta: float) -> void:
+	var v = get_velocity(delta)
+	position += v
+	rotation = v.angle() + PI / 2
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3325"]
 size = Vector2(2640, 1480)
@@ -17,11 +33,20 @@ color = Color(1, 0.870588, 0.482353, 1)
 polygon = PackedVector2Array(0, -80, -40, -40, -80, 0, 0, 80, 80, 0)
 script = ExtResource("1_fy3yr")
 
+[node name="Mars" type="Polygon2D" parent="."]
+position = Vector2(400, 0)
+color = Color(0.827451, 0.329412, 0, 1)
+polygon = PackedVector2Array(0, -40, -40, 0, 0, 40, 40, 0)
+script = SubResource("GDScript_tepyw")
+
+[node name="Shadow" type="Polygon2D" parent="Mars"]
+modulate = Color(1, 1, 1, 0.196078)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(0, -40, 0, 40, 40, 0)
+
 [node name="Player" parent="." instance=ExtResource("1_xq2cx")]
 position = Vector2(-400, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_s3325")
-
-[connection signal="area_exited" from="." to="." method="_on_area_exited"]
