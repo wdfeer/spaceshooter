@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo2uyrutxrce5"]
+[gd_scene load_steps=7 format=3 uid="uid://bo2uyrutxrce5"]
 
 [ext_resource type="Script" path="res://src/solar_system/sun.gd" id="1_fy3yr"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="1_xq2cx"]
 [ext_resource type="Script" path="res://src/solar_system/solar_system.gd" id="1_yhnk1"]
+[ext_resource type="PackedScene" uid="uid://1jqojvimrfhr" path="res://src/mars.tscn" id="2_w5d6k"]
 
 [sub_resource type="GDScript" id="GDScript_tepyw"]
 script/source = "extends Polygon2D
@@ -27,6 +28,7 @@ size = Vector2(2640, 1480)
 position = Vector2(1280, 720)
 monitorable = false
 script = ExtResource("1_yhnk1")
+mars_scene = ExtResource("2_w5d6k")
 
 [node name="Sun" type="Polygon2D" parent="."]
 color = Color(1, 0.870588, 0.482353, 1)
@@ -44,9 +46,16 @@ modulate = Color(1, 1, 1, 0.196078)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, -40, 0, 40, 40, 0)
 
+[node name="MarsLoader" type="Area2D" parent="Mars"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mars/MarsLoader"]
+polygon = PackedVector2Array(-64, 0, 0, -64, 64, 0, 0, 64)
+
 [node name="Player" parent="." instance=ExtResource("1_xq2cx")]
 position = Vector2(-400, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("RectangleShape2D_s3325")
+
+[connection signal="area_entered" from="Mars/MarsLoader" to="." method="_on_mars_loader_area_entered"]
