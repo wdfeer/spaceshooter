@@ -15,7 +15,6 @@ func get_player_position() -> Vector2:
 		return player.global_position
 	return Vector2.ZERO
 
-
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
 		area.queue_free()
