@@ -1,47 +1,25 @@
-[gd_scene load_steps=12 format=3 uid="uid://bo2uyrutxrce5"]
+[gd_scene load_steps=17 format=3 uid="uid://bo2uyrutxrce5"]
 
 [ext_resource type="Script" path="res://src/solar_system/sun_visual.gd" id="1_fy3yr"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="1_xq2cx"]
 [ext_resource type="Script" path="res://src/solar_system/solar_system.gd" id="1_yhnk1"]
 [ext_resource type="PackedScene" uid="uid://1jqojvimrfhr" path="res://src/mars.tscn" id="2_w5d6k"]
-[ext_resource type="Script" path="res://src/solar_system/ui_animator.gd" id="4_ofred"]
+[ext_resource type="Script" path="res://src/solar_system/kill_count.gd" id="4_p00e3"]
 [ext_resource type="Script" path="res://src/solar_system/sun_area.gd" id="4_t8s7a"]
 [ext_resource type="Script" path="res://src/solar_system/planet.gd" id="4_wj1of"]
+[ext_resource type="Script" path="res://src/solar_system/save_area.gd" id="5_5ucw4"]
+[ext_resource type="Script" path="res://src/solar_system/load_area.gd" id="6_i2tkt"]
 
 [sub_resource type="Animation" id="Animation_a60hq"]
 resource_name = "show"
 length = 0.25
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sun/SunArea/KillCount:visible")
+tracks/0/path = NodePath("Sun/SunArea/UIAnimator")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.01),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sun/SunArea/KillCount:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, -2),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sun/SunArea/UIAnimator")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -49,13 +27,37 @@ tracks/2/keys = {
 "method": &"on_ui_show"
 }]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sun/SunArea/HoverUI:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.01),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sun/SunArea/HoverUI:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ml16k"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sun/SunArea/KillCount:visible")
+tracks/0/path = NodePath("Sun/SunArea/HoverUI:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -67,7 +69,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sun/SunArea/KillCount:modulate")
+tracks/1/path = NodePath("Sun/SunArea/HoverUI:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -81,6 +83,44 @@ tracks/1/keys = {
 _data = {
 "RESET": SubResource("Animation_ml16k"),
 "show": SubResource("Animation_a60hq")
+}
+
+[sub_resource type="Animation" id="Animation_ar8nu"]
+resource_name = "idle"
+length = 0.6667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionPolygon2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.00833333, 0.158333, 0.491667, 0.666667),
+"transitions": PackedFloat32Array(0.5, 2, 2, 0.5),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(40, 0), Vector2(-40, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pglsd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionPolygon2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jnd3"]
+_data = {
+"RESET": SubResource("Animation_pglsd"),
+"idle": SubResource("Animation_ar8nu")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3325"]
@@ -105,26 +145,77 @@ root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_iobg7")
 }
-script = ExtResource("4_ofred")
 
-[node name="KillCount" type="Label" parent="Sun/SunArea"]
+[node name="HoverUI" type="Control" parent="Sun/SunArea"]
 visible = false
 modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="KillCount" type="Label" parent="Sun/SunArea/HoverUI"]
 custom_minimum_size = Vector2(256, 0)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -680.0
-offset_right = 128.0
-offset_bottom = -592.0
+offset_left = -148.0
+offset_top = -700.0
+offset_right = 108.0
+offset_bottom = -612.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 48
 text = "Kills: %s"
 horizontal_alignment = 1
+script = ExtResource("4_p00e3")
+
+[node name="SaveArea" type="Area2D" parent="Sun/SunArea/HoverUI"]
+position = Vector2(0, -400)
+script = ExtResource("5_5ucw4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sun/SunArea/HoverUI/SaveArea"]
+polygon = PackedVector2Array(-80, 0, -80, 80, 80, 80, 80, 0)
+
+[node name="Label" type="Label" parent="Sun/SunArea/HoverUI/SaveArea/CollisionPolygon2D"]
+custom_minimum_size = Vector2(256, 0)
+offset_left = -128.0
+offset_right = 128.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 64
+text = "SAVE"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sun/SunArea/HoverUI/SaveArea"]
+libraries = {
+"": SubResource("AnimationLibrary_4jnd3")
+}
+autoplay = "idle"
+
+[node name="LoadArea" type="Area2D" parent="Sun/SunArea/HoverUI"]
+position = Vector2(0, 400)
+script = ExtResource("6_i2tkt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sun/SunArea/HoverUI/LoadArea"]
+polygon = PackedVector2Array(-80, 0, -80, 80, 80, 80, 80, 0)
+
+[node name="Label" type="Label" parent="Sun/SunArea/HoverUI/LoadArea/CollisionPolygon2D"]
+custom_minimum_size = Vector2(256, 0)
+offset_left = -128.0
+offset_right = 128.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 64
+text = "LOAD"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sun/SunArea/HoverUI/LoadArea"]
+libraries = {
+"": SubResource("AnimationLibrary_4jnd3")
+}
+autoplay = "idle"
 
 [node name="Polygon" type="Polygon2D" parent="Sun"]
 color = Color(1, 0.870588, 0.482353, 1)
@@ -168,4 +259,6 @@ shape = SubResource("RectangleShape2D_s3325")
 
 [connection signal="area_entered" from="Sun/SunArea" to="Sun/SunArea" method="_on_area_entered"]
 [connection signal="area_exited" from="Sun/SunArea" to="Sun/SunArea" method="_on_area_exited"]
+[connection signal="area_entered" from="Sun/SunArea/HoverUI/SaveArea" to="Sun/SunArea/HoverUI/SaveArea" method="_on_area_entered"]
+[connection signal="area_entered" from="Sun/SunArea/HoverUI/LoadArea" to="Sun/SunArea/HoverUI/LoadArea" method="_on_area_entered"]
 [connection signal="area_entered" from="Mars/MarsLoader" to="." method="_on_mars_loader_area_entered"]
