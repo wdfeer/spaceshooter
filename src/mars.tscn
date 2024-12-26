@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://1jqojvimrfhr"]
+[gd_scene load_steps=5 format=3 uid="uid://1jqojvimrfhr"]
 
+[ext_resource type="Script" path="res://src/mars.gd" id="1_b4rev"]
 [ext_resource type="PackedScene" uid="uid://c6er7x7dtmehh" path="res://src/enemy/enemy_spawner.tscn" id="1_sn47i"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="2_fu306"]
 
-[node name="Mars" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xr4fa"]
+size = Vector2(2640, 1480)
+
+[node name="Mars" type="Area2D"]
+position = Vector2(1280, 720)
+monitorable = false
+script = ExtResource("1_b4rev")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xr4fa")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("1_sn47i")]
 
 [node name="Player" parent="." instance=ExtResource("2_fu306")]
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
