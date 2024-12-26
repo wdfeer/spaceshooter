@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SpaceShooter"
-config/version="1a"
+config/version="2a"
 run/main_scene="res://src/solar_system.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 
