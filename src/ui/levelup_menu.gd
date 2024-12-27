@@ -14,7 +14,6 @@ func create_option(txt: String, change_stats: Callable) -> Button:
 	return result
 
 func _on_option_pressed(change_stats: Callable):
-	print("Button PRESSED!!")
 	self.queue_free()
 	get_tree().paused = false
 	change_stats.call()

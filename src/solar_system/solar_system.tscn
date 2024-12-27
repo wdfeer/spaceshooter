@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://src/solar_system/solar_system.gd" id="1_yhnk1"]
 [ext_resource type="PackedScene" uid="uid://1jqojvimrfhr" path="res://src/mars/mars.tscn" id="2_w5d6k"]
 [ext_resource type="PackedScene" uid="uid://dnxa8qfdff4oq" path="res://src/earth/earth.tscn" id="3_uuu3a"]
-[ext_resource type="Script" path="res://src/solar_system/kill_count.gd" id="4_p00e3"]
 [ext_resource type="Script" path="res://src/solar_system/sun_area.gd" id="4_t8s7a"]
 [ext_resource type="Script" path="res://src/solar_system/planet.gd" id="4_wj1of"]
 [ext_resource type="Script" path="res://src/solar_system/save_area.gd" id="5_5ucw4"]
+[ext_resource type="PackedScene" uid="uid://curjos8mhm47p" path="res://src/ui/stat_ui.tscn" id="6_xtsw5"]
 
 [sub_resource type="Animation" id="Animation_ml16k"]
 length = 0.001
@@ -141,25 +141,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="KillCount" type="Label" parent="Sun/SunArea/HoverUI"]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -148.0
-offset_top = -700.0
-offset_right = 108.0
-offset_bottom = -612.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 48
-text = "Kills: %s"
-horizontal_alignment = 1
-script = ExtResource("4_p00e3")
-
 [node name="SaveArea" type="Area2D" parent="Sun/SunArea/HoverUI"]
 position = Vector2(0, -200)
 script = ExtResource("5_5ucw4")
@@ -181,6 +162,13 @@ libraries = {
 "": SubResource("AnimationLibrary_4jnd3")
 }
 autoplay = "idle"
+
+[node name="StatUI" parent="Sun/SunArea/HoverUI" instance=ExtResource("6_xtsw5")]
+layout_mode = 0
+offset_left = -1260.0
+offset_top = -200.0
+offset_right = -960.0
+offset_bottom = 200.0
 
 [node name="Polygon" type="Polygon2D" parent="Sun"]
 color = Color(1, 0.870588, 0.482353, 1)
