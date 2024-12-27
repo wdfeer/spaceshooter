@@ -1,32 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://curjos8mhm47p"]
+[gd_scene load_steps=3 format=3 uid="uid://curjos8mhm47p"]
 
 [ext_resource type="Script" path="res://src/ui/stat_ui.gd" id="1_beute"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lcf6k"]
+content_margin_left = 20.0
+content_margin_right = 20.0
+
 [node name="StatUI" type="PanelContainer"]
-offset_right = 300.0
-offset_bottom = 400.0
+offset_right = 250.0
+offset_bottom = 186.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lcf6k")
 script = ExtResource("1_beute")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
+alignment = 1
 
 [node name="Playtime" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Playtime: %s seconds"
+theme_override_font_sizes/font_size = 24
+text = "Playtime: %d seconds"
 
 [node name="KillCount" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Kills: %s"
+theme_override_font_sizes/font_size = 24
+text = "Kills: %d"
 
 [node name="XP" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "XP: %s"
+theme_override_font_sizes/font_size = 24
+text = "XP: %d"
 
 [node name="Attack" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Damage: %s"
+theme_override_font_sizes/font_size = 24
+text = "Damage: %d"
 
 [node name="Health" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Health: %s"
+theme_override_font_sizes/font_size = 24
+text = "Health: %d"

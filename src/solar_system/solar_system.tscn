@@ -165,9 +165,9 @@ autoplay = "idle"
 
 [node name="StatUI" parent="Sun/SunArea/HoverUI" instance=ExtResource("6_xtsw5")]
 layout_mode = 0
-offset_left = -1260.0
+offset_left = -1280.0
 offset_top = -200.0
-offset_right = -960.0
+offset_right = -980.0
 offset_bottom = 200.0
 
 [node name="Polygon" type="Polygon2D" parent="Sun"]
