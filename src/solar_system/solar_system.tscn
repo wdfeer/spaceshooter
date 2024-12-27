@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bo2uyrutxrce5"]
+[gd_scene load_steps=16 format=3 uid="uid://bo2uyrutxrce5"]
 
 [ext_resource type="Script" path="res://src/solar_system/sun_visual.gd" id="1_fy3yr"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="1_xq2cx"]
@@ -8,7 +8,33 @@
 [ext_resource type="Script" path="res://src/solar_system/sun_area.gd" id="4_t8s7a"]
 [ext_resource type="Script" path="res://src/solar_system/planet.gd" id="4_wj1of"]
 [ext_resource type="Script" path="res://src/solar_system/save_area.gd" id="5_5ucw4"]
-[ext_resource type="Script" path="res://src/solar_system/load_area.gd" id="6_i2tkt"]
+
+[sub_resource type="Animation" id="Animation_ml16k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sun/SunArea/HoverUI:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sun/SunArea/HoverUI:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_a60hq"]
 resource_name = "show"
@@ -52,37 +78,25 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_ml16k"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iobg7"]
+_data = {
+"RESET": SubResource("Animation_ml16k"),
+"show": SubResource("Animation_a60hq")
+}
+
+[sub_resource type="Animation" id="Animation_pglsd"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sun/SunArea/HoverUI:visible")
+tracks/0/path = NodePath("CollisionPolygon2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sun/SunArea/HoverUI:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_iobg7"]
-_data = {
-"RESET": SubResource("Animation_ml16k"),
-"show": SubResource("Animation_a60hq")
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ar8nu"]
@@ -100,21 +114,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.5, 2, 2, 0.5),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(40, 0), Vector2(-40, 0), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_pglsd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CollisionPolygon2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4jnd3"]
@@ -174,7 +173,7 @@ horizontal_alignment = 1
 script = ExtResource("4_p00e3")
 
 [node name="SaveArea" type="Area2D" parent="Sun/SunArea/HoverUI"]
-position = Vector2(0, -400)
+position = Vector2(0, -300)
 script = ExtResource("5_5ucw4")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sun/SunArea/HoverUI/SaveArea"]
@@ -190,28 +189,6 @@ text = "SAVE"
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sun/SunArea/HoverUI/SaveArea"]
-libraries = {
-"": SubResource("AnimationLibrary_4jnd3")
-}
-autoplay = "idle"
-
-[node name="LoadArea" type="Area2D" parent="Sun/SunArea/HoverUI"]
-position = Vector2(0, 400)
-script = ExtResource("6_i2tkt")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sun/SunArea/HoverUI/LoadArea"]
-polygon = PackedVector2Array(-80, 0, -80, 80, 80, 80, 80, 0)
-
-[node name="Label" type="Label" parent="Sun/SunArea/HoverUI/LoadArea/CollisionPolygon2D"]
-custom_minimum_size = Vector2(256, 0)
-offset_left = -128.0
-offset_right = 128.0
-offset_bottom = 88.0
-theme_override_font_sizes/font_size = 64
-text = "LOAD"
-horizontal_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sun/SunArea/HoverUI/LoadArea"]
 libraries = {
 "": SubResource("AnimationLibrary_4jnd3")
 }
@@ -260,5 +237,4 @@ shape = SubResource("RectangleShape2D_s3325")
 [connection signal="area_entered" from="Sun/SunArea" to="Sun/SunArea" method="_on_area_entered"]
 [connection signal="area_exited" from="Sun/SunArea" to="Sun/SunArea" method="_on_area_exited"]
 [connection signal="area_entered" from="Sun/SunArea/HoverUI/SaveArea" to="Sun/SunArea/HoverUI/SaveArea" method="_on_area_entered"]
-[connection signal="area_entered" from="Sun/SunArea/HoverUI/LoadArea" to="Sun/SunArea/HoverUI/LoadArea" method="_on_area_entered"]
 [connection signal="area_entered" from="Mars/MarsLoader" to="." method="_on_mars_loader_area_entered"]

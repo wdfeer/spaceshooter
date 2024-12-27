@@ -2,10 +2,14 @@ extends Node
 
 var kill_count: int = 0
 
-func save():
+func _ready() -> void:
+	load_game()
+
+func save_game():
 	var file = FileAccess.open("user://save", FileAccess.WRITE)
 	file.store_32(kill_count)
 
-func load():
+func load_game():
 	var file = FileAccess.open("user://save", FileAccess.READ)
-	kill_count = file.get_32()
+	if file:
+		kill_count = file.get_32()
