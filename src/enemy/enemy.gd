@@ -25,19 +25,25 @@ func update_player_position(delta: float):
 	if player:
 		player_pos = player.global_position
 
+var melee_damage: float = 1.0
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
-		area.dead = true
-		area.queue_free()
+		area.damage(1.0)
+
+var hp: float = 1.0
+func damage(amount: float):
+	hp -= amount
+	if hp <= 0:
+		kill()
 
 @export
-var upgrade_point_drop: PackedScene
-const UPGRADE_POINT_DROP_CHANCE: float = 0.12
+var xp_drop: PackedScene
+const UPGRADE_POINT_DROP_CHANCE: float = 0.2
 
 func kill():
 	Stats.kill_count += 1
 	queue_free()
 	if randf() < UPGRADE_POINT_DROP_CHANCE:
-		var drop: Node2D = upgrade_point_drop.instantiate()
+		var drop: Node2D = xp_drop.instantiate()
 		add_sibling(drop)
 		drop.global_position = global_position

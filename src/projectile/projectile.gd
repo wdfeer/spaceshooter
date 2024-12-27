@@ -4,6 +4,7 @@ extends Area2D
 var friendly = true
 var timeleft: float = 1.5
 var velocity: Vector2
+var damage: float = 1.0
 
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
@@ -13,10 +14,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if can_hit(area):
-		if !friendly:
-			area.kill()
-		elif randf() * Stats.attack > 0.6:
-			area.kill()
+		area.damage(damage)
 		queue_free()
 
 func can_hit(other: Area2D) -> bool:

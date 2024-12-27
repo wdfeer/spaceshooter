@@ -13,4 +13,14 @@ func _physics_process(delta: float) -> void:
 	if velocity.length() > 0:
 		rotation = velocity.angle() + PI / 2
 
-var dead = false
+var hp: float = 1.0
+func damage(amount: float):
+	hp -= amount
+	if is_dead():
+		kill()
+
+func is_dead() -> bool:
+	return hp <= 0
+
+func kill():
+	queue_free()
