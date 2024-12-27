@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bo2uyrutxrce5"]
+[gd_scene load_steps=17 format=3 uid="uid://bo2uyrutxrce5"]
 
 [ext_resource type="Script" path="res://src/solar_system/sun_visual.gd" id="1_fy3yr"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="1_xq2cx"]
 [ext_resource type="Script" path="res://src/solar_system/solar_system.gd" id="1_yhnk1"]
-[ext_resource type="PackedScene" uid="uid://1jqojvimrfhr" path="res://src/mars.tscn" id="2_w5d6k"]
+[ext_resource type="PackedScene" uid="uid://1jqojvimrfhr" path="res://src/planet_play_area.tscn" id="2_w5d6k"]
+[ext_resource type="PackedScene" uid="uid://dnxa8qfdff4oq" path="res://src/earth.tscn" id="3_uuu3a"]
 [ext_resource type="Script" path="res://src/solar_system/kill_count.gd" id="4_p00e3"]
 [ext_resource type="Script" path="res://src/solar_system/sun_area.gd" id="4_t8s7a"]
 [ext_resource type="Script" path="res://src/solar_system/planet.gd" id="4_wj1of"]
@@ -130,6 +131,7 @@ position = Vector2(1280, 720)
 monitorable = false
 script = ExtResource("1_yhnk1")
 mars_scene = ExtResource("2_w5d6k")
+earth_scene = ExtResource("3_uuu3a")
 
 [node name="Sun" type="Node2D" parent="."]
 
@@ -173,7 +175,7 @@ horizontal_alignment = 1
 script = ExtResource("4_p00e3")
 
 [node name="SaveArea" type="Area2D" parent="Sun/SunArea/HoverUI"]
-position = Vector2(0, -300)
+position = Vector2(0, -200)
 script = ExtResource("5_5ucw4")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sun/SunArea/HoverUI/SaveArea"]
@@ -210,6 +212,11 @@ modulate = Color(1, 1, 1, 0.196078)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, -40, 0, 40, 40, 0)
 
+[node name="EarthArea" type="Area2D" parent="Earth"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Earth/EarthArea"]
+polygon = PackedVector2Array(-80, 0, 0, -80, 80, 0, 0, 80)
+
 [node name="Mars" type="Polygon2D" parent="."]
 position = Vector2(650, 0)
 scale = Vector2(0.8, 0.8)
@@ -237,4 +244,5 @@ shape = SubResource("RectangleShape2D_s3325")
 [connection signal="area_entered" from="Sun/SunArea" to="Sun/SunArea" method="_on_area_entered"]
 [connection signal="area_exited" from="Sun/SunArea" to="Sun/SunArea" method="_on_area_exited"]
 [connection signal="area_entered" from="Sun/SunArea/HoverUI/SaveArea" to="Sun/SunArea/HoverUI/SaveArea" method="_on_area_entered"]
+[connection signal="area_entered" from="Earth/EarthArea" to="." method="_on_earth_area_area_entered"]
 [connection signal="area_entered" from="Mars/MarsLoader" to="." method="_on_mars_loader_area_entered"]
