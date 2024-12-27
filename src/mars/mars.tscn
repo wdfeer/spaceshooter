@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://1jqojvimrfhr"]
 
-[ext_resource type="Script" path="res://src/mars.gd" id="1_b4rev"]
+[ext_resource type="Script" path="res://src/planet_play_area.gd" id="1_b4rev"]
 [ext_resource type="PackedScene" uid="uid://c6er7x7dtmehh" path="res://src/enemy/enemy_spawner.tscn" id="1_sn47i"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="2_fu306"]
 
@@ -13,6 +13,7 @@ monitorable = false
 script = ExtResource("1_b4rev")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_xr4fa")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("1_sn47i")]

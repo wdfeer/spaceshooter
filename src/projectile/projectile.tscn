@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dj4t5gv1mgcpp"]
 
 [ext_resource type="Texture2D" uid="uid://bo34kt4tvx82x" path="res://assets/kenney_simple_space/star_tiny.png" id="1_5m6hj"]
-[ext_resource type="Script" path="res://src/projectile.gd" id="1_nkdpy"]
+[ext_resource type="Script" path="res://src/projectile/projectile.gd" id="1_nkdpy"]
 
 [node name="Projectile" type="Area2D"]
 script = ExtResource("1_nkdpy")

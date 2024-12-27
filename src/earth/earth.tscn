@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnxa8qfdff4oq"]
+
+[ext_resource type="Script" path="res://src/planet_play_area.gd" id="1_dtj53"]
+[ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="3_ca04a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xr4fa"]
+size = Vector2(2640, 1480)
+
+[sub_resource type="Animation" id="Animation_ekmx0"]
+resource_name = "idle"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Earth:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10, 20),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_axge4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Earth:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sux7w"]
+_data = {
+"RESET": SubResource("Animation_axge4"),
+"idle": SubResource("Animation_ekmx0")
+}
+
+[node name="Earth" type="Area2D"]
+position = Vector2(1280, 720)
+monitorable = false
+script = ExtResource("1_dtj53")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_xr4fa")
+
+[node name="EarthVisual" type="Node2D" parent="."]
+
+[node name="Earth" type="Polygon2D" parent="EarthVisual"]
+position = Vector2(640, 0)
+color = Color(0.258008, 0.523161, 0.782836, 1)
+polygon = PackedVector2Array(0, -384, -384, 0, 0, 384, 384, 0)
+
+[node name="NorthAmerica" type="Polygon2D" parent="EarthVisual/Earth"]
+color = Color(0.2, 0.5, 0.2, 1)
+polygon = PackedVector2Array(-192, 0, -48, -144, -144, -240, -288, -96, -192, -96)
+
+[node name="Eurasia" type="Polygon2D" parent="EarthVisual/Earth"]
+position = Vector2(0, 192)
+color = Color(0.2, 0.5, 0.2, 1)
+polygon = PackedVector2Array(-288, -96, -240, -96, -192, -144, -144, -96, -144, -48, -48, -48, 48, 48, 48, 144, 0, 192)
+
+[node name="IceCap" type="Polygon2D" parent="EarthVisual/Earth"]
+color = Color(1, 1, 1, 0.588235)
+polygon = PackedVector2Array(-48, 0, 0, -48, 48, 0, 0, 48)
+
+[node name="Shadow" type="Polygon2D" parent="EarthVisual"]
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(640, 0)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(384, 384, 0, 384, 0, -384, 384, -384)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EarthVisual"]
+libraries = {
+"": SubResource("AnimationLibrary_sux7w")
+}
+autoplay = "idle"
+speed_scale = 0.4
+
+[node name="Player" parent="." instance=ExtResource("3_ca04a")]
+rotation = -1.5708
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
