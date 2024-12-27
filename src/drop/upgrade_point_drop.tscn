@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2pbvt27lffky"]
+
+[ext_resource type="Script" path="res://src/drop/upgrade_point_drop.gd" id="1_0b6xl"]
+[ext_resource type="Texture2D" uid="uid://uepi2t6osbpr" path="res://assets/kenney_board_game_icons/hexagon.png" id="1_1cl40"]
+
+[node name="UpgradePointDrop" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_0b6xl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1cl40")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-48, 48, -48, -48, 0, -72, 48, -48, 48, 48, 0, 72)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -30,6 +30,14 @@ func _on_area_entered(area: Area2D) -> void:
 		area.dead = true
 		area.queue_free()
 
+@export
+var upgrade_point_drop: PackedScene
+const UPGRADE_POINT_DROP_CHANCE: float = 0.12
+
 func kill():
 	UserData.kill_count += 1
 	queue_free()
+	if randf() < UPGRADE_POINT_DROP_CHANCE:
+		var drop: Node2D = upgrade_point_drop.instantiate()
+		add_sibling(drop)
+		drop.global_position = global_position
