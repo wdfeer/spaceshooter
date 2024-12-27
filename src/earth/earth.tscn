@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnxa8qfdff4oq"]
+[gd_scene load_steps=11 format=3 uid="uid://dnxa8qfdff4oq"]
 
 [ext_resource type="Script" path="res://src/planet_play_area.gd" id="1_dtj53"]
 [ext_resource type="Texture2D" uid="uid://dxtvquk5xctyn" path="res://assets/kenney_board_game_icons/sword.png" id="2_5foab"]
+[ext_resource type="Script" path="res://src/earth/upgrades.gd" id="2_w8sl2"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="3_ca04a"]
+[ext_resource type="Texture2D" uid="uid://uepi2t6osbpr" path="res://assets/kenney_board_game_icons/hexagon.png" id="3_kvvy6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xr4fa"]
 size = Vector2(2640, 1480)
@@ -43,6 +45,9 @@ _data = {
 "RESET": SubResource("Animation_axge4"),
 "idle": SubResource("Animation_ekmx0")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15b5h"]
+size = Vector2(120, 120)
 
 [node name="Earth" type="Area2D"]
 position = Vector2(1280, 720)
@@ -87,26 +92,33 @@ autoplay = "idle"
 speed_scale = 0.4
 
 [node name="Upgrades" type="VBoxContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -1200.0
 offset_top = -64.0
 offset_right = -1072.0
 offset_bottom = 64.0
-grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+script = ExtResource("2_w8sl2")
+upgrade_point_texture = ExtResource("3_kvvy6")
 
 [node name="Attack" type="HBoxContainer" parent="Upgrades"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Upgrades/Attack"]
+[node name="Icon" type="TextureRect" parent="Upgrades/Attack"]
 layout_mode = 2
 texture = ExtResource("2_5foab")
+
+[node name="AttackUpgrade" type="Area2D" parent="Upgrades/Attack/Icon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Upgrades/Attack/Icon/AttackUpgrade"]
+position = Vector2(65, 65)
+shape = SubResource("RectangleShape2D_15b5h")
 
 [node name="Player" parent="." instance=ExtResource("3_ca04a")]
 rotation = -1.5708
 
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="area_entered" from="Upgrades/Attack/Icon/AttackUpgrade" to="Upgrades" method="_on_attack_upgrade_area_area_entered"]

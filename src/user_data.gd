@@ -2,6 +2,8 @@ extends Node
 
 var kill_count: int = 0
 var upgrade_points: int = 0
+var attack: int = 1
+var health: int = 1
 
 func _ready() -> void:
 	load_game()
