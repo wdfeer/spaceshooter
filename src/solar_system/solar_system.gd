@@ -11,8 +11,8 @@ var earth_scene: PackedScene
 
 func _on_mars_loader_area_entered(area: Area2D) -> void:
 	if area is Player:
-		get_tree().change_scene_to_packed(mars_scene)
+		get_tree().call_deferred("change_scene_to_packed", mars_scene)
 
 func _on_earth_area_area_entered(area: Area2D) -> void:
 	if area is Player:
-		get_tree().change_scene_to_packed(earth_scene)
+		get_tree().call_deferred("change_scene_to_packed", earth_scene)

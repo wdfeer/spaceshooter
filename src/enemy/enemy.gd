@@ -38,12 +38,15 @@ func damage(amount: float):
 
 @export
 var xp_drop: PackedScene
-const UPGRADE_POINT_DROP_CHANCE: float = 0.2
+const UPGRADE_POINT_DROP_CHANCE: float = 1.0
 
 func kill():
 	Stats.kill_count += 1
-	queue_free()
 	if randf() < UPGRADE_POINT_DROP_CHANCE:
-		var drop: Node2D = xp_drop.instantiate()
-		add_sibling(drop)
-		drop.global_position = global_position
+		call_deferred("drop_xp")
+	queue_free()
+
+func drop_xp():
+	var drop: Node2D = xp_drop.instantiate()
+	add_sibling(drop)
+	drop.global_position = global_position

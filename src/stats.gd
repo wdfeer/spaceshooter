@@ -28,9 +28,9 @@ func increase_xp(amount: int):
 	xp += amount
 	var lvl2 = get_lvl()
 	if lvl2 > lvl1:
-		levelup.emit(lvl2 - lvl1)
+		levelup.emit()
 
 func get_lvl() -> int:
 	return floori(1 + sqrt(xp / 7.0))
 
-signal levelup(level_count: int)
+signal levelup
