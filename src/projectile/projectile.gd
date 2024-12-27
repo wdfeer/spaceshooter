@@ -15,7 +15,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if can_hit(area):
 		if !friendly:
 			area.kill()
-		elif randf() * UserData.attack > 0.6:
+		elif randf() * Stats.attack > 0.6:
 			area.kill()
 		queue_free()
 
