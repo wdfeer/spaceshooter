@@ -10,6 +10,7 @@ func create_option(txt: String, change_stats: Callable) -> Button:
 	var result: Button = Button.new()
 	result.text = txt
 	result.pressed.connect(_on_option_pressed.bind(change_stats))
+	result.add_theme_font_size_override("font_size", 24)
 	return result
 
 func _on_option_pressed(change_stats: Callable):
