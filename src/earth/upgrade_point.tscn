@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cj8j4o2yqdycc"]
+
+[node name="UpgradePoint" type="Polygon2D"]
+polygon = PackedVector2Array(24, -24, 0, 24, 0, 0, -24, 24, 0, -24, 0, 0)

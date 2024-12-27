@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnxa8qfdff4oq"]
+[gd_scene load_steps=8 format=3 uid="uid://dnxa8qfdff4oq"]
 
 [ext_resource type="Script" path="res://src/planet_play_area.gd" id="1_dtj53"]
+[ext_resource type="Texture2D" uid="uid://dxtvquk5xctyn" path="res://assets/kenney_board_game_icons/sword.png" id="2_5foab"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="3_ca04a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xr4fa"]
@@ -84,6 +85,26 @@ libraries = {
 }
 autoplay = "idle"
 speed_scale = 0.4
+
+[node name="Upgrades" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1200.0
+offset_top = -64.0
+offset_right = -1072.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Attack" type="HBoxContainer" parent="Upgrades"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Upgrades/Attack"]
+layout_mode = 2
+texture = ExtResource("2_5foab")
 
 [node name="Player" parent="." instance=ExtResource("3_ca04a")]
 rotation = -1.5708
