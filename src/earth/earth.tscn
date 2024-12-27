@@ -1,13 +1,29 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnxa8qfdff4oq"]
+[gd_scene load_steps=12 format=3 uid="uid://dnxa8qfdff4oq"]
 
 [ext_resource type="Script" path="res://src/planet_play_area.gd" id="1_dtj53"]
 [ext_resource type="Texture2D" uid="uid://dxtvquk5xctyn" path="res://assets/kenney_board_game_icons/sword.png" id="2_5foab"]
 [ext_resource type="Script" path="res://src/earth/upgrades.gd" id="2_w8sl2"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="3_ca04a"]
 [ext_resource type="Texture2D" uid="uid://uepi2t6osbpr" path="res://assets/kenney_board_game_icons/hexagon.png" id="3_kvvy6"]
+[ext_resource type="Script" path="res://src/earth/upgrade_point_label.gd" id="5_va4mx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xr4fa"]
 size = Vector2(2640, 1480)
+
+[sub_resource type="Animation" id="Animation_axge4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Earth:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_ekmx0"]
 resource_name = "idle"
@@ -23,21 +39,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 3.14159, 6.28319]
-}
-
-[sub_resource type="Animation" id="Animation_axge4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Earth:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sux7w"]
@@ -90,6 +91,16 @@ libraries = {
 }
 autoplay = "idle"
 speed_scale = 0.4
+
+[node name="UpgradePointLabel" type="Label" parent="."]
+offset_left = -1184.0
+offset_top = 576.0
+offset_right = -887.0
+offset_bottom = 621.0
+theme_override_font_sizes/font_size = 32
+text = "Upgrade Points: %s"
+vertical_alignment = 2
+script = ExtResource("5_va4mx")
 
 [node name="Upgrades" type="VBoxContainer" parent="."]
 anchors_preset = 4
