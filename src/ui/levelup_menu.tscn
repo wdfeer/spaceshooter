@@ -4,23 +4,28 @@
 [ext_resource type="Script" path="res://addons/tnowe_extra_controls/elements/radial_container.gd" id="2_6e65y"]
 [ext_resource type="Script" path="res://addons/tnowe_extra_controls/elements/radial_container_theme.gd" id="3_iwrpy"]
 
-[sub_resource type="Resource" id="Resource_bfhk2"]
+[sub_resource type="Resource" id="Resource_2v8a3"]
 script = ExtResource("3_iwrpy")
-radius_factor_outer = 1.0
-radius_factor_inner = 0.1
+radius_factor_outer = 1.5
+radius_factor_inner = 0.5
 item_radius_factor = 0.5
 item_scale = Vector2(1, 1)
 color = Color(1, 1, 1, 1)
 
 [node name="LevelUpMenu" type="Control"]
-custom_minimum_size = Vector2(320, 320)
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_m8fdw")
 
 [node name="RadialMenu" type="Container" parent="."]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 320.0
+custom_minimum_size = Vector2(320, 320)
+layout_mode = 1
+offset_left = -160.0
+offset_top = -160.0
+offset_right = 160.0
+offset_bottom = 160.0
 script = ExtResource("2_6e65y")
-radial_theme = SubResource("Resource_bfhk2")
+progress_offset = 0.333
+border_between_width = 16.0
+radial_theme = SubResource("Resource_2v8a3")
