@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://d10uhclpm5vsi"]
+
+[ext_resource type="Script" path="res://src/ui/level_up_menu.gd" id="1_maias"]
+[ext_resource type="Script" path="res://addons/tnowe_extra_controls/elements/radial_container.gd" id="1_y33fm"]
+[ext_resource type="Script" path="res://addons/tnowe_extra_controls/elements/radial_container_theme.gd" id="2_m8i3p"]
+
+[sub_resource type="Resource" id="Resource_bfhk2"]
+script = ExtResource("2_m8i3p")
+radius_factor_outer = 1.0
+radius_factor_inner = 0.1
+item_radius_factor = 0.5
+item_scale = Vector2(1, 1)
+color = Color(1, 1, 1, 1)
+
+[node name="LevelUpMenu" type="Control"]
+custom_minimum_size = Vector2(320, 320)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_maias")
+
+[node name="RadialMenu" type="Container" parent="."]
+offset_right = 320.0
+offset_bottom = 320.0
+script = ExtResource("1_y33fm")
+radial_theme = SubResource("Resource_bfhk2")
