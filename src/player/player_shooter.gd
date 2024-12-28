@@ -17,4 +17,5 @@ func shoot():
 	player.get_parent().add_child(proj)
 	proj.global_position = player.global_position
 	proj.velocity = Vector2.from_angle(player.rotation - PI / 2) * SHOOT_VELOCITY
+	proj.damage = Stats.attack
 	start()
