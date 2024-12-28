@@ -7,7 +7,23 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xr4fa"]
 size = Vector2(2640, 1480)
 
-[sub_resource type="Animation" id="Animation_axge4"]
+[sub_resource type="Animation" id="Animation_vtwmq"]
+resource_name = "idle"
+length = 20.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mars:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_h0xdp"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -22,26 +38,10 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_ekmx0"]
-resource_name = "idle"
-length = 20.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mars:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 10, 20),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 3.14159, 6.28319]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sux7w"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aubb6"]
 _data = {
-"RESET": SubResource("Animation_axge4"),
-"idle": SubResource("Animation_ekmx0")
+"RESET": SubResource("Animation_h0xdp"),
+"idle": SubResource("Animation_vtwmq")
 }
 
 [node name="Mars" type="Area2D"]
@@ -76,9 +76,9 @@ polygon = PackedVector2Array(384, 384, 0, 384, 0, -384, 384, -384)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarsVisual"]
 libraries = {
-"": SubResource("AnimationLibrary_sux7w")
+"": SubResource("AnimationLibrary_aubb6")
 }
 autoplay = "idle"
-speed_scale = 0.4
+speed_scale = 0.3
 
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
