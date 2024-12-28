@@ -9,18 +9,20 @@ func _ready() -> void:
 	var active_shape: Node2D = shapes.pick_random()
 	active_shape.disabled = false
 	active_shape.visible = true
+	reset_hp()
+	reset_color()
 
 const SPEED = 250.0
 var velocity: Vector2 = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
-	update_player_position(delta)
+	update_player_position()
 	velocity = global_position.direction_to(player_pos) * SPEED
 	rotation = velocity.angle() + PI / 2
 	global_position += velocity * delta
 
 var player_pos: Vector2 = Vector2.ZERO
-func update_player_position(delta: float):
+func update_player_position():
 	var player: Node2D = get_node_or_null("../Player")
 	if player:
 		player_pos = player.global_position
@@ -31,6 +33,15 @@ func _on_area_entered(area: Area2D) -> void:
 		area.damage(1.0)
 
 var hp: float = 1.0
+
+func reset_hp():
+	hp = float(randi_range(1, 2))
+func reset_color():
+	if hp <= 1:
+		modulate = Color.WHITE
+	else:
+		modulate = Color.BISQUE
+
 func damage(amount: float):
 	hp -= amount
 	if hp <= 0:
