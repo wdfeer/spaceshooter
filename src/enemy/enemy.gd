@@ -44,6 +44,7 @@ func reset_color():
 
 func damage(amount: float):
 	hp -= amount
+	CombatText.instance.damage_number(global_position, amount)
 	if hp <= 0:
 		kill()
 

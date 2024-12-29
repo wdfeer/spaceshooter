@@ -8,7 +8,7 @@ var projectile_scene: PackedScene
 @onready
 var player: Player = $".."
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("shoot") && is_stopped():
 		shoot()
 
