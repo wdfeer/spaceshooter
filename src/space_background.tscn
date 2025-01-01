@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b05bdc8yxrxi8"]
+
+[ext_resource type="Shader" path="res://src/shaders/background.gdshader" id="1_2wiuj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v5m2m"]
+shader = ExtResource("1_2wiuj")
+shader_parameter/bg_color = null
+shader_parameter/offset = null
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.001
+shader_parameter/mediumStarAmount = 0.002
+shader_parameter/bigStarAmount = 0.006
+
+[node name="SpaceBackground" type="ColorRect"]
+material = SubResource("ShaderMaterial_v5m2m")
+custom_minimum_size = Vector2(2560, 1440)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

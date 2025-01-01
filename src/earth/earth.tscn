@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnxa8qfdff4oq"]
+[gd_scene load_steps=8 format=3 uid="uid://dnxa8qfdff4oq"]
 
 [ext_resource type="Script" path="res://src/planet_play_area.gd" id="1_dtj53"]
+[ext_resource type="PackedScene" uid="uid://b05bdc8yxrxi8" path="res://src/space_background.tscn" id="2_3chx5"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="3_ca04a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xr4fa"]
@@ -47,6 +48,12 @@ _data = {
 position = Vector2(1280, 720)
 monitorable = false
 script = ExtResource("1_dtj53")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_3chx5")]
+offset_left = -1280.0
+offset_top = -720.0
+offset_right = 1280.0
+offset_bottom = 720.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

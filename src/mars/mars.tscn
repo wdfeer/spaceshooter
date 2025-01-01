@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://1jqojvimrfhr"]
+[gd_scene load_steps=10 format=3 uid="uid://1jqojvimrfhr"]
 
 [ext_resource type="Script" path="res://src/planet_play_area.gd" id="1_b4rev"]
 [ext_resource type="PackedScene" uid="uid://c6er7x7dtmehh" path="res://src/enemy/enemy_spawner.tscn" id="1_sn47i"]
+[ext_resource type="PackedScene" uid="uid://b05bdc8yxrxi8" path="res://src/space_background.tscn" id="2_0fwkg"]
 [ext_resource type="PackedScene" uid="uid://bbwre6tb1fepi" path="res://src/player/player.tscn" id="2_fu306"]
 [ext_resource type="Script" path="res://src/combat_text.gd" id="4_5wpf2"]
 
@@ -49,6 +50,8 @@ _data = {
 position = Vector2(1280, 720)
 monitorable = false
 script = ExtResource("1_b4rev")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("2_0fwkg")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
